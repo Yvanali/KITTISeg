@@ -50,7 +50,7 @@ def main(args):
     model_save_path = args.model_save_path
     compression_model = args.grid_size[2]
     grid_size = args.grid_size
-    pytorch_device = torch.device('cuda:2')
+    pytorch_device = torch.device('cuda:3')
     model = args.model
     if model == 'polar':
         fea_dim = 9

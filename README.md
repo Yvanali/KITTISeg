@@ -1,4 +1,5 @@
 # PolarNet: An Improved Grid Representation for Online LiDAR Point Clouds Semantic Segmentation
+THis is a modified repo of PolarNet. We rename it as KITTISeg
 
 
 <p align="center">

@@ -7,7 +7,7 @@ THis is a modified repo of PolarNet. We rename it as KITTISeg
         <em>LiDAR scan visualization of SemanticKITTI dataset(left) and the prediction result of PolarNet(right).</em>
 </p>
 
-Official PyTorch implementation for online LiDAR scan segmentation neural network **PolarNet** (CVPR 2020).
+Modified PyTorch implementation for online LiDAR scan segmentation neural network **PolarNet** (CVPR 2020).
 
 <pre>
 PolarNet: An Improved Grid Representation for Online LiDAR Point Clouds Semantic Segmentation

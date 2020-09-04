@@ -181,10 +181,10 @@ def main(args):
 if __name__ == '__main__':
     # Training settings
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('-d', '--data_dir', default='/media/omnisky/11112/xuyan/SemanticKITTI/dataset')
+    parser.add_argument('-d', '--data_dir', default='/media/omnisky/dataset_disk/xuyan/SemanticKITTI/dataset')
     parser.add_argument('-p', '--model_save_path', default='./SemKITTI_PolarSeg.pt')
     parser.add_argument('-m', '--model', choices=['polar','traditional'], default='polar', help='training model: polar or traditional (default: polar)')
-    parser.add_argument('-s', '--grid_size', nargs='+', type=int, default = [480,240,32], help='grid size of BEV representation (default: [480,360,32])')
+    parser.add_argument('-s', '--grid_size', nargs='+', type=int, default = [360,240,32], help='grid size of BEV representation (default: [480,360,32])')
     parser.add_argument('--train_batch_size', type=int, default=2, help='batch size for training (default: 2)')
     parser.add_argument('--val_batch_size', type=int, default=2, help='batch size for validation (default: 2)')
     parser.add_argument('--check_iter', type=int, default=4000, help='validation interval (default: 4000)')

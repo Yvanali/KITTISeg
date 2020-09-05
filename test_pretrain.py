@@ -170,7 +170,7 @@ if __name__ == '__main__':
     # Testing settings
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('-d', '--data_dir', default='data')
-    parser.add_argument('-p', '--model_save_path', default='pretrained_weight/SemKITTI_PolarSeg.pt')
+    parser.add_argument('-p', '--model_save_path', default='./SemKITTI_PolarSeg.pt')
     parser.add_argument('-o', '--test_output_path', default='out/SemKITTI_test')
     parser.add_argument('-m', '--model', choices=['polar','traditional'], default='polar', help='training model: polar or traditional (default: polar)')
     parser.add_argument('-s', '--grid_size', nargs='+', type=int, default = [480,240,32], help='grid size of BEV representation (default: [480,360,32])')

@@ -239,7 +239,7 @@ class spherical_dataset(data.Dataset):
         # center data on each voxel for PTnet
         voxel_centers = (grid_ind.astype(np.float32) + 0.5)*intervals + min_bound
         return_xyz = xyz_pol - voxel_centers
-        return_xyz = np.concatenate((return_xyz, torch.exp(return_xyz), xyz_pol,xyz[:,:2]),axis = 1)
+        return_xyz = np.concatenate((return_xyz, np.exp(return_xyz), xyz_pol,xyz[:,:2]),axis = 1)
 
         if len(data) == 2:
             return_fea = return_xyz

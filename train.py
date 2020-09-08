@@ -53,7 +53,7 @@ def main(args):
     pytorch_device = torch.device('cuda:2')
     model = args.model
     if model == 'polar':
-        fea_dim = 12
+        fea_dim = 9
         circular_padding = True
     elif model == 'traditional':
         fea_dim = 7

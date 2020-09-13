@@ -235,7 +235,7 @@ class spherical_dataset(data.Dataset):
         label_voxel_pair = label_voxel_pair[np.lexsort((grid_ind[:,0],grid_ind[:,1],grid_ind[:,2])),:]
         processed_label = nb_process_label(np.copy(processed_label),label_voxel_pair)
         data_tuple = (voxel_position,processed_label)
-        print('---data_tuple--',data_tuple)
+        #print('---data_tuple--',data_tuple)
         # center data on each voxel for PTnet
         voxel_centers = (grid_ind.astype(np.float32) + 0.5)*intervals + min_bound
         return_xyz = xyz_pol - voxel_centers

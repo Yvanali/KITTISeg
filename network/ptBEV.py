@@ -82,6 +82,7 @@ class ptBEVnet(nn.Module):
         # unique xy grid index
         unq, unq_inv, unq_cnt = torch.unique(cat_pt_ind,return_inverse=True, return_counts=True, dim=0)
         unq = unq.type(torch.int64)
+        print('--------unq--------', unq.shape)
         
         # subsample pts
         if self.pt_selection == 'random':
@@ -133,10 +134,11 @@ class ptBEVnet(nn.Module):
         
         # stuff pooled data into 4D tensor
         out_data_dim = [len(pt_fea),self.grid_size[0],self.grid_size[1],self.pt_fea_dim]
+        #print('-----pooled_data-----', out_out_data_dim.shape)    
         out_data = torch.zeros(out_data_dim, dtype=torch.float32).to(cur_dev)
         out_data[unq[:,0],unq[:,1],unq[:,2],:] = processed_pooled_data
         out_data = out_data.permute(0,3,1,2) #[2, 32, 360, 240]
-        #print('-----pooled_data-----', out_data.shape)    
+
         if self.local_pool_op != None:
             out_data = self.local_pool_op(out_data) [2, 32, 360, 240]
     

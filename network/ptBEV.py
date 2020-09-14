@@ -83,7 +83,6 @@ class ptBEVnet(nn.Module):
         # unique xy grid index
         unq, unq_inv, unq_cnt = torch.unique(cat_pt_ind,return_inverse=True, return_counts=True, dim=0)
         unq = unq.type(torch.int64)
-        print('-----unq_cnt-----', unq_inv.shape, unq_cnt.shape)
         
         # subsample pts
         if self.pt_selection == 'random':
@@ -114,7 +113,7 @@ class ptBEVnet(nn.Module):
         cat_pt_ind = cat_pt_ind[remain_ind,:]
         unq_inv = unq_inv[remain_ind]
         unq_cnt = torch.clamp(unq_cnt,max=self.max_pt)
-        print('-----cat_pt_fea-----', cat_pt_fea.shape)
+
 
 
         # process feature
@@ -124,6 +123,7 @@ class ptBEVnet(nn.Module):
         if self.pt_pooling == 'max':
             pooled_data = torch_scatter.scatter_max(processed_cat_pt_fea, unq_inv, dim=0)[0]
         else: raise NotImplementedError
+        print('-----pooled_data-----', pooled_data.shape)
         
         if self.fea_compre:
             processed_pooled_data = self.fea_compression(pooled_data)

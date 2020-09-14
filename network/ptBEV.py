@@ -70,10 +70,9 @@ class ptBEVnet(nn.Module):
         for i_batch in range(len(xy_ind)):
             cat_pt_ind.append(F.pad(xy_ind[i_batch],(1,0),'constant',value = i_batch))
 
-        cat_pt_fea = torch.cat(pt_fea,dim = 0) #[200200,512]
+        cat_pt_fea = torch.cat(pt_fea,dim = 0) #[252662,9]
         cat_pt_ind = torch.cat(cat_pt_ind,dim = 0)
-        pt_num = cat_pt_ind.shape[0]
-        print('--------pt_num--------', pt_num)
+        pt_num = cat_pt_ind.shape[0] #252662
 
         # shuffle the data
         shuffled_ind = torch.randperm(pt_num,device = cur_dev)
@@ -119,7 +118,6 @@ class ptBEVnet(nn.Module):
         # process feature
         if self.pt_model == 'pointnet':
             processed_cat_pt_fea = self.PPmodel(cat_pt_fea) #[252431, 512]
-        print('---------processed_cat_pt_fea-------', processed_cat_pt_fea.shape)
         
         if self.pt_pooling == 'max':
             pooled_data = torch_scatter.scatter_max(processed_cat_pt_fea, unq_inv, dim=0)[0] #[200200,512]

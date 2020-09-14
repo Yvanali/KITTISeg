@@ -134,7 +134,7 @@ class ptBEVnet(nn.Module):
         
         # stuff pooled data into 4D tensor
         out_data_dim = [len(pt_fea),self.grid_size[0],self.grid_size[1],self.pt_fea_dim]
-        #print('-----pooled_data-----', out_out_data_dim.shape)    
+        print('-----pooled_data-----', out_out_data_dim.shape)    
         out_data = torch.zeros(out_data_dim, dtype=torch.float32).to(cur_dev)
         out_data[unq[:,0],unq[:,1],unq[:,2],:] = processed_pooled_data
         out_data = out_data.permute(0,3,1,2) #[2, 32, 360, 240]

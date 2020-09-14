@@ -121,14 +121,16 @@ class ptBEVnet(nn.Module):
             processed_cat_pt_fea = self.PPmodel(cat_pt_fea)
         
         if self.pt_pooling == 'max':
-            pooled_data = torch_scatter.scatter_max(processed_cat_pt_fea, unq_inv, dim=0)[0]
+            pooled_data = torch_scatter.scatter_max(processed_cat_pt_fea, unq_inv, dim=0)[0] #[200200,512]
         else: raise NotImplementedError
-        print('-----pooled_data-----', pooled_data.shape)
+
         
         if self.fea_compre:
             processed_pooled_data = self.fea_compression(pooled_data)
         else:
             processed_pooled_data = pooled_data
+
+        print('-----pooled_data-----', processed_pooled_data.shape)
         
         # stuff pooled data into 4D tensor
         out_data_dim = [len(pt_fea),self.grid_size[0],self.grid_size[1],self.pt_fea_dim]

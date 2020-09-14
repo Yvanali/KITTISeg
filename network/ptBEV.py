@@ -137,9 +137,10 @@ class ptBEVnet(nn.Module):
         out_data = torch.zeros(out_data_dim, dtype=torch.float32).to(cur_dev)
         out_data[unq[:,0],unq[:,1],unq[:,2],:] = processed_pooled_data
         out_data = out_data.permute(0,3,1,2)
+        print('-----pooled_data-----', out_data.shape)    
         if self.local_pool_op != None:
-            out_data = self.local_pool_op(out_data)
-        print('-----pooled_data-----', out_data.shape)        
+            out_data = self.local_pool_op(out_data) [2, 32, 360, 240]
+    
         # run through network
         net_return_data = self.BEV_model(out_data)
         

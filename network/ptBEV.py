@@ -73,7 +73,7 @@ class ptBEVnet(nn.Module):
         cat_pt_fea = torch.cat(pt_fea,dim = 0) #[200200,512]
         cat_pt_ind = torch.cat(cat_pt_ind,dim = 0)
         pt_num = cat_pt_ind.shape[0]
-        print('--------pt_num--------', pt_num.shape)
+        print('--------pt_num--------', pt_num)
 
         # shuffle the data
         shuffled_ind = torch.randperm(pt_num,device = cur_dev)

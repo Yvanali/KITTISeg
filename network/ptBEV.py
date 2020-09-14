@@ -72,7 +72,6 @@ class ptBEVnet(nn.Module):
             cat_pt_ind.append(F.pad(xy_ind[i_batch],(1,0),'constant',value = i_batch))
 
         cat_pt_fea = torch.cat(pt_fea,dim = 0)
-        print('----------', cat_pt_fea.shape)
         cat_pt_ind = torch.cat(cat_pt_ind,dim = 0)
         pt_num = cat_pt_ind.shape[0]
 
@@ -84,6 +83,7 @@ class ptBEVnet(nn.Module):
         # unique xy grid index
         unq, unq_inv, unq_cnt = torch.unique(cat_pt_ind,return_inverse=True, return_counts=True, dim=0)
         unq = unq.type(torch.int64)
+        print('-----unq_cnt-----', unq_inv.shape, unq_cnt.shape)
         
         # subsample pts
         if self.pt_selection == 'random':
@@ -114,7 +114,9 @@ class ptBEVnet(nn.Module):
         cat_pt_ind = cat_pt_ind[remain_ind,:]
         unq_inv = unq_inv[remain_ind]
         unq_cnt = torch.clamp(unq_cnt,max=self.max_pt)
-        
+        print('-----cat_pt_fea-----', cat_pt_fea.shape)
+
+
         # process feature
         if self.pt_model == 'pointnet':
             processed_cat_pt_fea = self.PPmodel(cat_pt_fea)

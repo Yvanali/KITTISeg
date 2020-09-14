@@ -65,7 +65,7 @@ class ptBEVnet(nn.Module):
         
     def forward(self, pt_fea, xy_ind):
         cur_dev = pt_fea[0].get_device()
-        
+        print('****************', pt_fea.shape, xy_ind.shape)
         # concate everything
         cat_pt_ind = []
         for i_batch in range(len(xy_ind)):
@@ -136,8 +136,8 @@ class ptBEVnet(nn.Module):
         out_data_dim = [len(pt_fea),self.grid_size[0],self.grid_size[1],self.pt_fea_dim]
         out_data = torch.zeros(out_data_dim, dtype=torch.float32).to(cur_dev)
         out_data[unq[:,0],unq[:,1],unq[:,2],:] = processed_pooled_data
-        out_data = out_data.permute(0,3,1,2)
-        print('-----pooled_data-----', out_data.shape)    
+        out_data = out_data.permute(0,3,1,2) #[2, 32, 360, 240]
+        #print('-----pooled_data-----', out_data.shape)    
         if self.local_pool_op != None:
             out_data = self.local_pool_op(out_data) [2, 32, 360, 240]
     

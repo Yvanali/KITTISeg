@@ -126,11 +126,11 @@ class ptBEVnet(nn.Module):
 
         
         if self.fea_compre:
-            processed_pooled_data = self.fea_compression(pooled_data)
+            processed_pooled_data = self.fea_compression(pooled_data) #[200200,32]
         else:
             processed_pooled_data = pooled_data
 
-        print('-----pooled_data-----', processed_pooled_data.shape)
+
         
         # stuff pooled data into 4D tensor
         out_data_dim = [len(pt_fea),self.grid_size[0],self.grid_size[1],self.pt_fea_dim]
@@ -139,7 +139,7 @@ class ptBEVnet(nn.Module):
         out_data = out_data.permute(0,3,1,2)
         if self.local_pool_op != None:
             out_data = self.local_pool_op(out_data)
-        
+        print('-----pooled_data-----', out_data.shape)        
         # run through network
         net_return_data = self.BEV_model(out_data)
         

@@ -117,7 +117,7 @@ def main(args):
                         val_pt_labs = SemKITTI2train(val_pt_labs)
                         val_pt_fea_ten = [torch.from_numpy(i).type(torch.FloatTensor).to(pytorch_device) for i in val_pt_fea]
                         val_grid_ten = [torch.from_numpy(i[:,:2]).to(pytorch_device) for i in val_grid]
-                        print('-------val_grid_ten---------', np.shape(val_grid_ten), np.shape(val_pt_fea_ten))
+                        print('-------val_grid_ten---------', np.asarray(val_grid_ten).shape, np.asarray(val_pt_fea_ten).shape)
                         val_label_tensor=val_vox_label.type(torch.LongTensor).to(pytorch_device)
 
                         predict_labels = my_model(val_pt_fea_ten, val_grid_ten)
